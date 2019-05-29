@@ -1,0 +1,9 @@
+H=server1
+ssh $H "yum install xinetd -y"
+scp /opt/observium/scripts/observium_agent $H:/usr/bin/observium_agent
+scp /opt/observium/scripts/observium_agent_xinetd $H:/etc/xinetd.d/observium_agent
+ssh $H "mkdir -pv /usr/lib/observium_agent/local/"
+scp -pr /opt/observium/scripts/agent-local/* /opt/observium/scripts/os $H:/usr/lib/observium_agent/local/
+
+ssh $H "systemctl enable xinetd.service;systemctl restart xinetd.service"
+ssh $H "firewall-cmd --permanent --add-port=36602/tcp;firewall-cmd --reload"
