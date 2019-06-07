@@ -1,5 +1,5 @@
 H=server1
-ssh $H "yum install xinetd nmap-ncat -y"
+ssh $H "yum install xinetd nmap-ncat nc -y"
 scp /opt/observium/scripts/observium_agent $H:/usr/bin/observium_agent
 scp /opt/observium/scripts/observium_agent_xinetd $H:/etc/xinetd.d/observium_agent
 ssh $H "mkdir -pv /usr/lib/observium_agent/local/"
