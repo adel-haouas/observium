@@ -8,6 +8,9 @@ scp -pr /opt/observium/scripts/agent-local/* /opt/observium/scripts/os $H:/usr/l
 ssh $H "systemctl enable xinetd.service;systemctl restart xinetd.service"
 ssh $H "firewall-cmd --permanent --add-port=36602/tcp;firewall-cmd --reload"
 
+#Verification
+nc -zv $H 36602
+
 #Centos6
 ssh $H "chkconfig xinetd on;service xinetd restart"
 #+ authorize 36602/tcp in iptables, if it's enabled
