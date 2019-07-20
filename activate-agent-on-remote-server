@@ -26,7 +26,7 @@ cd  /usr/lib/observium_agent/local/
 rm -fv os && cp /opt/observium/scripts/os .
 
 #remove unused scripts
-rm -rfv areca-hw asterisk bind ceph dhcpkit dovecot dpkg drbd exim* freeradius* ipmitool-sensor jvm-over-jmx jvm-over-jmx/ kamailio ksm lighttpd lmsensors lvs_stats mongodb nfs* nginx nsd ntpd nvidia-smi openvpn postgresql.* powerdns* proxmox-qemu sabnzbd-qstatus shoutcast* temperature unbound varnish z*
+rm -rfv areca-hw asterisk bind ceph dhcpkit dovecot dpkg drbd exim* freeradius* ipmitool-sensor jvm-over-jmx kamailio ksm lighttpd lmsensors lvs_stats mongodb nfs* nginx nsd ntpd nvidia-smi openvpn postgresql.* powerdns* proxmox-qemu sabnzbd-qstatus shoutcast* temperature unbound varnish z*
 
 systemctl enable xinetd.service;systemctl restart xinetd.service
 nc -zv 127.1 36602
