@@ -1,0 +1,6 @@
+#Error: Can't locate LWP/Simple.pm in @INC ....
+yum install "perl(LWP::Simple)"
+or
+yum install perl-libwww-perl
+
+#
