@@ -24,5 +24,6 @@ mkdir -pv /usr/lib/observium_agent/local/
 cp -pr /opt/observium/scripts/agent-local/* /opt/observium/scripts/os /usr/lib/observium_agent/local/
 cd  /usr/lib/observium_agent/local/
 rm -fv os && cp /opt/observium/scripts/os .
+rm -rfv dpkg mongodb nvidia-smi shoutcast* powerdns* nsd bind jvm-over-jmx asterisk exim* freeradius* dhcpkit kamailio ipmitool-sensor drbd ceph openvpn nfs* ntpd sabnzbd-qstatus temperature unbound varnish freeradius* dovecot exim* ksm ipmitool-sensor shoutcast* varnish   temperature z* unbound bind nfs* dpkg nginx postgresql.* jvm-over-jmx/ asterisk kamailio lighttpd openvpn nsd powerdns* areca-hw asterisk ceph drbd
 systemctl enable xinetd.service;systemctl restart xinetd.service
 nc -zv 127.1 36602
