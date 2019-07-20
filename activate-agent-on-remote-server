@@ -23,5 +23,6 @@ cp /opt/observium/scripts/observium_agent_xinetd /etc/xinetd.d/observium_agent
 mkdir -pv /usr/lib/observium_agent/local/
 cp -pr /opt/observium/scripts/agent-local/* /opt/observium/scripts/os /usr/lib/observium_agent/local/
 cd  /usr/lib/observium_agent/local/
+rm -fv os && cp /opt/observium/scripts/os .
 systemctl enable xinetd.service;systemctl restart xinetd.service
 nc -zv 127.1 36602
