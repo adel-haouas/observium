@@ -1,6 +1,21 @@
+#### OBSERVIUM AGENT : apache
+
+#add following lines to the end of /etc/httpd/conf/httpd.conf, if they don't exist
+#then restart httpd (systemctl restart httpd.service)
+
+<IfModule mod_status.c>
+   ExtendedStatus On
+   <Location /server-status>
+     SetHandler server-status
+     Require all denied
+     Require local
+    # Allow from localhost
+   </Location>
+</IfModule>
+
 #Error: Can't locate LWP/Simple.pm in @INC ....
 yum install "perl(LWP::Simple)"
 or
 yum install perl-libwww-perl
 
-#
+#### 
