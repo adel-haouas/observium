@@ -14,3 +14,14 @@ nc -zv $H 36602
 #Centos6
 ssh $H "chkconfig xinetd on;service xinetd restart"
 #+ authorize 36602/tcp in iptables, if it's enabled
+
+
+## on the observium itself
+yum install xinetd nmap-ncat nc -y
+cp /opt/observium/scripts/observium_agent /usr/bin/observium_agent
+cp /opt/observium/scripts/observium_agent_xinetd /etc/xinetd.d/observium_agent
+mkdir -pv /usr/lib/observium_agent/local/
+cp -pr /opt/observium/scripts/agent-local/* /opt/observium/scripts/os /usr/lib/observium_agent/local/
+cd  /usr/lib/observium_agent/local/
+systemctl enable xinetd.service;systemctl restart xinetd.service
+nc -zv 127.1 36602
