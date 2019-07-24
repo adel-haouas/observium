@@ -28,5 +28,7 @@
 yum install "perl(LWP::Simple)"
 or
 yum install perl-libwww-perl
+or
+apt-get install libwww-perl (debian/ubuntu)
 
 #### 
