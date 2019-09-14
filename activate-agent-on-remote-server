@@ -1,3 +1,4 @@
+## Case of remote server is Centos6/7
 H=server1
 ssh $H "yum install xinetd nmap-ncat nc -y"
 scp /opt/observium/scripts/observium_agent $H:/usr/bin/observium_agent
@@ -8,15 +9,23 @@ scp -pr /opt/observium/scripts/agent-local/* /opt/observium/scripts/os $H:/usr/l
 ssh $H "systemctl enable xinetd.service;systemctl restart xinetd.service"
 ssh $H "firewall-cmd --permanent --add-port=36602/tcp;firewall-cmd --reload"
 
-#Verification
-nc -zv $H 36602
-
 #Centos6
 ssh $H "chkconfig xinetd on;service xinetd restart"
 #+ authorize 36602/tcp in iptables, if it's enabled
 
+## Case of remote server is Ubuntu/Debian
+ssh $H "apt install xinetd netcat6 sysv-rc-conf -y"
+scp /opt/observium/scripts/observium_agent $H:/usr/bin/observium_agent
+scp /opt/observium/scripts/observium_agent_xinetd $H:/etc/xinetd.d/observium_agent
+ssh $H "mkdir -pv /usr/lib/observium_agent/local/"
+scp -pr /opt/observium/scripts/agent-local/* /opt/observium/scripts/os $H:/usr/lib/observium_agent/local/
+ssh $H "sysv-rc-conf xinetd on;service xinetd restart"
 
-## on the observium itself
+#Verification
+nc -zv $H 36602
+
+
+## On the observium itself
 yum install xinetd nmap-ncat nc -y
 cp /opt/observium/scripts/observium_agent /usr/bin/observium_agent
 cp /opt/observium/scripts/observium_agent_xinetd /etc/xinetd.d/observium_agent
