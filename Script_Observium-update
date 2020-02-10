@@ -1,0 +1,30 @@
+#Disable observium cronjobs & kill current running processes
+mv  /etc/cron.d/observium.cron /root/
+
+pkill snmpbulkwalk
+pkill poller.php
+pkill poller-wrapper.py
+ps -ef|egrep "obs|snmp"
+
+##
+cd /opt
+mv observium observium_old_`date +%Y.%m.%d`
+mv observium-community-latest.tar.gz observium-community-latest.tar.gz-`date +%Y.%m.%d`
+
+wget -Oobservium-community-latest.tar.gz http://www.observium.org/observium-community-latest.tar.gz
+tar zxvf observium-community-latest.tar.gz
+
+mv /opt/observium_old_`date +%Y.%m.%d`/rrd/ observium
+mv /opt/observium_old_`date +%Y.%m.%d`/*log* observium
+mv /opt/observium_old_`date +%Y.%m.%d`/config.php observium/
+chown -R  apache:apache /opt/observium
+
+/opt/observium/discovery.php -u
+#screen /opt/observium/discovery.php -h all
+
+#Enable observium cronjobs & kill current running processes
+mv /root/observium.cron  /etc/cron.d/observium.cron
+
+cp -p /opt/observium_old_`date +%Y.%m.%d`/html/includes/navbar-custom.inc.php /opt/observium/html/includes/
+cp -pr /opt/observium_old_`date +%Y.%m.%d`/html/weathermap/ /opt/observium/html/
+cp -p /opt/observium/html/weathermap/overlib.js  /opt/observium/html/
