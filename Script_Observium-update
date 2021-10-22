@@ -29,3 +29,8 @@ mv /root/observium.cron  /etc/cron.d/observium.cron
 cp -p /opt/observium_old_`date +%Y.%m.%d`/html/includes/navbar-custom.inc.php /opt/observium/html/includes/
 cp -pr /opt/observium_old_`date +%Y.%m.%d`/html/weathermap/ /opt/observium/html/
 cp -p /opt/observium/html/weathermap/overlib.js  /opt/observium/html/
+
+
+### PRO version ##
+cd /opt/observium/ && svn update
+screen /opt/observium/discovery.php -u
