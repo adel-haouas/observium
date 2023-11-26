@@ -18,7 +18,12 @@ tar zxvf observium-community-latest.tar.gz
 mv /opt/observium_old_`date +%Y.%m.%d`/rrd/ observium
 mv /opt/observium_old_`date +%Y.%m.%d`/*log* observium
 mv /opt/observium_old_`date +%Y.%m.%d`/config.php observium/
+
+## if distro centos/redhat
 chown -R  apache:apache /opt/observium
+
+## if distro debian/ubuntu
+chown -R www-data:www-data /opt/observium
 
 /opt/observium/discovery.php -u
 #screen /opt/observium/discovery.php -h all
