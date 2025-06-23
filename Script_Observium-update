@@ -5,7 +5,7 @@ pkill snmpbulkwalk
 pkill snmpget
 pkill poller.php
 pkill poller-wrapper.py
-ps -ef|egrep "obs|snmp"
+ps -ef|egrep "obs|snmp" |grep -v "/usr/sbin/snmpd"|grep -v grep
 
 ##
 cd /opt
